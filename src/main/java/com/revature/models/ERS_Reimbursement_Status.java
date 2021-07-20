@@ -1,10 +1,14 @@
 package com.revature.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,26 +22,33 @@ public class ERS_Reimbursement_Status {
 	
 	@Column(name = "reimb_status")
 	private String status;
+	
+	@OneToMany
+	@JoinColumn(name = "reimb_status_id")
+	private Set<ERS_Reimbursement> statusReimb;
 
 	public ERS_Reimbursement_Status() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ERS_Reimbursement_Status(int status_id, String status) {
+	public ERS_Reimbursement_Status(int status_id, String status, Set<ERS_Reimbursement> statusReimb) {
 		super();
 		this.status_id = status_id;
 		this.status = status;
+		this.statusReimb = statusReimb;
 	}
 
-	public ERS_Reimbursement_Status(String status) {
+	public ERS_Reimbursement_Status(String status, Set<ERS_Reimbursement> statusReimb) {
 		super();
 		this.status = status;
+		this.statusReimb = statusReimb;
 	}
 
 	@Override
 	public String toString() {
-		return "ERS_Reimbursement_Status [status_id=" + status_id + ", status=" + status + "]";
+		return "ERS_Reimbursement_Status [status_id=" + status_id + ", status=" + status + ", statusReimb="
+				+ statusReimb + "]";
 	}
 
 	@Override
@@ -45,6 +56,7 @@ public class ERS_Reimbursement_Status {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((statusReimb == null) ? 0 : statusReimb.hashCode());
 		result = prime * result + status_id;
 		return result;
 	}
@@ -62,6 +74,11 @@ public class ERS_Reimbursement_Status {
 			if (other.status != null)
 				return false;
 		} else if (!status.equals(other.status))
+			return false;
+		if (statusReimb == null) {
+			if (other.statusReimb != null)
+				return false;
+		} else if (!statusReimb.equals(other.statusReimb))
 			return false;
 		if (status_id != other.status_id)
 			return false;
@@ -83,6 +100,16 @@ public class ERS_Reimbursement_Status {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Set<ERS_Reimbursement> getStatusReimb() {
+		return statusReimb;
+	}
+
+	public void setStatusReimb(Set<ERS_Reimbursement> statusReimb) {
+		this.statusReimb = statusReimb;
+	}
+
+	
 	
 	
 

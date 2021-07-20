@@ -6,7 +6,7 @@ import com.revature.models.ERS_User_Role;
 
 public interface ERS_User_RoleDAOInterface {
 	
-	public List<ERS_User_Role> getAllUsers();
+	public List<ERS_User_Role> getAllUserRoles();
 	
 	public void insertUserRole(ERS_User_Role user_role);
 	

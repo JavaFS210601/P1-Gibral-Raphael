@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.controllers.LoginController;
 import com.revature.controllers.UserController;
 
-
-
 public class MasterServlet extends HttpServlet{
 	
 	private UserController uc = new UserController();

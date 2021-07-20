@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        
+        <hibernate-configuration>
+        	<session-factory>
+        		<property name="hibernate.connection.username">postgres</property>
+        		<property name="hibernate.connection.password">password</property>
+        		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres?currentSchema=gibralers</property>
+        		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        	
+        		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        		<property name="hibernate.default_schema">gibralers</property>
+        		
+        		<property name="hibernate.show_sql">true</property>
+        		<property name="hibernate.format_sql">true</property>
+			 	<!-- DDL -->
+				<property name="hibernate.hbm2ddl.auto">create</property>
+				<!-- remember, create drops your tables at runtime, update will simply update them -->
+				<!-- We'll map our classes here --> 	
+				<mapping class="com.revature.models.ERS_User"/>
+				<mapping class="com.revature.models.ERS_User_Role"/>
+				<mapping class="com.revature.models.ERS_Reimbursement"/>	
+				<mapping class="com.revature.models.ERS_Reimbursement_Type"/>	
+				<mapping class="com.revature.models.ERS_Reimbursement_Status"/>		
+
+				
+        	</session-factory>
+        
+        </hibernate-configuration>
+        

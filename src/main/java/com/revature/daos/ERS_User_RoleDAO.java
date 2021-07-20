@@ -11,7 +11,7 @@ import com.revature.utils.HibernateUtil;
 public class ERS_User_RoleDAO implements ERS_User_RoleDAOInterface{
 
 	@Override
-	public List<ERS_User_Role> getAllUsers() {
+	public List<ERS_User_Role> getAllUserRoles() {
 		// TODO Auto-generated method stub
 		Session ses = HibernateUtil.getSession();
 		

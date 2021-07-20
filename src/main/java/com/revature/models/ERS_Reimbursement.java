@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,21 +41,21 @@ public class ERS_Reimbursement {
     @Column(name="reimb_receipt")
 	private byte[] receipt;
 	
-	@OneToMany(mappedBy="ers_user", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "reimb_author")
-	private int author;
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ers_author_fk")
+	private ERS_User author;
 	
-	@OneToMany(mappedBy="ers_user", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "reimb_resolver")
-	private int resolver;
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ers_resolver_fk")
+	private ERS_User resolver;
 	
-	@OneToMany(mappedBy="ers_reimbursement_status", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "reimb_status_id")
-	private int status_id;
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "reimb_status_id")
+	private ERS_Reimbursement_Status status;
 	
-	@OneToMany(mappedBy="ers_reimbursement_type", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "reimb_type_id")
-	private int type_id;
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "reimb_type_id")
+	private ERS_Reimbursement_Type type;
 
 	public ERS_Reimbursement() {
 		super();
@@ -61,7 +63,8 @@ public class ERS_Reimbursement {
 	}
 
 	public ERS_Reimbursement(int id, int amount, LocalDateTime submitted, LocalDateTime resolved, String description,
-			byte[] receipt, int author, int resolver, int status_id, int type_id) {
+			byte[] receipt, ERS_User author, ERS_User resolver, ERS_Reimbursement_Status status,
+			ERS_Reimbursement_Type type) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -71,12 +74,13 @@ public class ERS_Reimbursement {
 		this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
-		this.status_id = status_id;
-		this.type_id = type_id;
+		this.status = status;
+		this.type = type;
 	}
 
 	public ERS_Reimbursement(int amount, LocalDateTime submitted, LocalDateTime resolved, String description,
-			byte[] receipt, int author, int resolver, int status_id, int type_id) {
+			byte[] receipt, ERS_User author, ERS_User resolver, ERS_Reimbursement_Status status,
+			ERS_Reimbursement_Type type) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
@@ -85,15 +89,15 @@ public class ERS_Reimbursement {
 		this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
-		this.status_id = status_id;
-		this.type_id = type_id;
+		this.status = status;
+		this.type = type;
 	}
 
 	@Override
 	public String toString() {
 		return "ERS_Reimbursement [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
 				+ resolved + ", description=" + description + ", receipt=" + Arrays.toString(receipt) + ", author="
-				+ author + ", resolver=" + resolver + ", status_id=" + status_id + ", type_id=" + type_id + "]";
+				+ author + ", resolver=" + resolver + ", status=" + status + ", type=" + type + "]";
 	}
 
 	@Override
@@ -101,15 +105,15 @@ public class ERS_Reimbursement {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
-		result = prime * result + author;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + Arrays.hashCode(receipt);
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
-		result = prime * result + resolver;
-		result = prime * result + status_id;
+		result = prime * result + ((resolver == null) ? 0 : resolver.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
-		result = prime * result + type_id;
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -124,7 +128,10 @@ public class ERS_Reimbursement {
 		ERS_Reimbursement other = (ERS_Reimbursement) obj;
 		if (amount != other.amount)
 			return false;
-		if (author != other.author)
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -140,16 +147,25 @@ public class ERS_Reimbursement {
 				return false;
 		} else if (!resolved.equals(other.resolved))
 			return false;
-		if (resolver != other.resolver)
+		if (resolver == null) {
+			if (other.resolver != null)
+				return false;
+		} else if (!resolver.equals(other.resolver))
 			return false;
-		if (status_id != other.status_id)
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		if (submitted == null) {
 			if (other.submitted != null)
 				return false;
 		} else if (!submitted.equals(other.submitted))
 			return false;
-		if (type_id != other.type_id)
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
@@ -202,37 +218,39 @@ public class ERS_Reimbursement {
 		this.receipt = receipt;
 	}
 
-	public int getAuthor() {
+	public ERS_User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(ERS_User author) {
 		this.author = author;
 	}
 
-	public int getResolver() {
+	public ERS_User getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(int resolver) {
+	public void setResolver(ERS_User resolver) {
 		this.resolver = resolver;
 	}
 
-	public int getStatus_id() {
-		return status_id;
+	public ERS_Reimbursement_Status getStatus() {
+		return status;
 	}
 
-	public void setStatus_id(int status_id) {
-		this.status_id = status_id;
+	public void setStatus(ERS_Reimbursement_Status status) {
+		this.status = status;
 	}
 
-	public int getType_id() {
-		return type_id;
+	public ERS_Reimbursement_Type getType() {
+		return type;
 	}
 
-	public void setType_id(int type_id) {
-		this.type_id = type_id;
+	public void setType(ERS_Reimbursement_Type type) {
+		this.type = type;
 	}
+
+	
 	
 	
 
