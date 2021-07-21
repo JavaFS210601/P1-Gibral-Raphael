@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.*;
 import java.util.Arrays;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,10 +29,10 @@ public class ERS_Reimbursement {
 	private int amount;
 	
 	@Column(name = "reimb_submitted")
-	private java.time.LocalDateTime submitted;
+	private String submitted;
 	
 	@Column(name = "reimb_resolved")
-	private java.time.LocalDateTime resolved;
+	private String resolved;
 	
 	@Column(name = "reimb_description")
 	private String description;
@@ -62,9 +62,8 @@ public class ERS_Reimbursement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ERS_Reimbursement(int id, int amount, LocalDateTime submitted, LocalDateTime resolved, String description,
-			byte[] receipt, ERS_User author, ERS_User resolver, ERS_Reimbursement_Status status,
-			ERS_Reimbursement_Type type) {
+	public ERS_Reimbursement(int id, int amount, String submitted, String resolved, String description, byte[] receipt,
+			ERS_User author, ERS_User resolver, ERS_Reimbursement_Status status, ERS_Reimbursement_Type type) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -78,9 +77,8 @@ public class ERS_Reimbursement {
 		this.type = type;
 	}
 
-	public ERS_Reimbursement(int amount, LocalDateTime submitted, LocalDateTime resolved, String description,
-			byte[] receipt, ERS_User author, ERS_User resolver, ERS_Reimbursement_Status status,
-			ERS_Reimbursement_Type type) {
+	public ERS_Reimbursement(int amount, String submitted, String resolved, String description, byte[] receipt,
+			ERS_User author, ERS_User resolver, ERS_Reimbursement_Status status, ERS_Reimbursement_Type type) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
@@ -186,19 +184,19 @@ public class ERS_Reimbursement {
 		this.amount = amount;
 	}
 
-	public java.time.LocalDateTime getSubmitted() {
+	public String getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(java.time.LocalDateTime submitted) {
+	public void setSubmitted(String submitted) {
 		this.submitted = submitted;
 	}
 
-	public java.time.LocalDateTime getResolved() {
+	public String getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(java.time.LocalDateTime resolved) {
+	public void setResolved(String resolved) {
 		this.resolved = resolved;
 	}
 
@@ -249,6 +247,8 @@ public class ERS_Reimbursement {
 	public void setType(ERS_Reimbursement_Type type) {
 		this.type = type;
 	}
+
+
 
 	
 	

@@ -17,7 +17,7 @@
         		<property name="hibernate.show_sql">true</property>
         		<property name="hibernate.format_sql">true</property>
 			 	<!-- DDL -->
-				<property name="hibernate.hbm2ddl.auto">create</property>
+				<property name="hibernate.hbm2ddl.auto">update</property>
 				<!-- remember, create drops your tables at runtime, update will simply update them -->
 				<!-- We'll map our classes here --> 	
 				<mapping class="com.revature.models.ERS_User"/>

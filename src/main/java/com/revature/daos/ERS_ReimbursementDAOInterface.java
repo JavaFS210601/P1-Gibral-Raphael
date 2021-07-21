@@ -16,4 +16,8 @@ public interface ERS_ReimbursementDAOInterface {
 	
 	public ERS_Reimbursement selectReimbursementById(int id);
 
+	public List<ERS_Reimbursement> getPendingReimbursements();
+
+	public List<ERS_Reimbursement> getAllReimbursementsbyEmp(String username);
+
 }

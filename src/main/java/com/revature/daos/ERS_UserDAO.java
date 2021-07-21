@@ -13,7 +13,7 @@ public class ERS_UserDAO implements ERS_UserDAOInterface {
 		// TODO Auto-generated method stub
 		Session ses = HibernateUtil.getSession();
 		
-		List<ERS_User> userList = ses.createQuery("FROM User").list();
+		List<ERS_User> userList = ses.createQuery("FROM ERS_User").list();
 		
 		HibernateUtil.closeSession();
 		
@@ -38,6 +38,8 @@ public class ERS_UserDAO implements ERS_UserDAOInterface {
 		
 		ses.merge(user);
 		
+		
+		
 	}
 
 	@Override
@@ -47,6 +49,7 @@ public class ERS_UserDAO implements ERS_UserDAOInterface {
 		
 		ERS_User user = ses.get(ERS_User.class, id);
 		
+		
 		return user;
 	}
 
@@ -55,9 +58,20 @@ public class ERS_UserDAO implements ERS_UserDAOInterface {
 		// TODO Auto-generated method stub
 		Session ses = HibernateUtil.getSession();
 		
-		ERS_User user = ses.get(ERS_User.class, username);
+		//List<ERS_User> userList  = ses.createQuery("FROM ERS_User WHERE ers_username = " + username).list();
 		
-		return user;
+		List<ERS_User> userList = ses.createQuery("FROM ERS_User").list();
+		
+		ERS_User findUser = new ERS_User();
+		
+		for(ERS_User user: userList) {
+			if(user.getUsername().equals(username)) {
+				findUser = user;
+			}
+		}
+		
+		
+		return findUser;
 	}
 
 }

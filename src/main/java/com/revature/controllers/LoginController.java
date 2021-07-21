@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.daos.ERS_UserDAO;
+import com.revature.models.ERS_User;
 import com.revature.models.LoginDTO;
 import com.revature.service.LoginService;
+import com.revature.service.UserService;
 
 public class LoginController {
 	
@@ -36,12 +40,19 @@ public class LoginController {
 			
 			if(ls.login(lDTO.username, lDTO.password)) {
 				HttpSession ses = req.getSession();
+				ERS_UserDAO uService = new ERS_UserDAO();
+				ERS_User user = uService.selectUserByUsername(lDTO.username);
+			
+				String json = om.writeValueAsString(user);
+				System.out.println(json);
+				
+				res.getWriter().print(json);
 				
 				ses.setAttribute("user", lDTO);
 				ses.setAttribute("loggedin", true);
 				
 				res.setStatus(200);
-				res.getWriter().print("Hi login was successfully");		
+//				res.getWriter().print("Hi login was successfully");		
 			}else {
 				HttpSession ses = req.getSession(false);
 				

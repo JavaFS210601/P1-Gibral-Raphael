@@ -23,33 +23,36 @@ public class ERS_User_Role {
 	@Column(name = "user_role")
 	private String role;
 	
-	@OneToMany
-	@JoinColumn(name = "ers_user_role_id")
-	private Set<ERS_User> users;
+
 
 	public ERS_User_Role() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ERS_User_Role(int id, String role, Set<ERS_User> users ) {
+
+
+	public ERS_User_Role(int id, String role) {
 		super();
 		this.id = id;
 		this.role = role;
-		this.users = users;
 	}
-	
 
-	public ERS_User_Role(String role, Set<ERS_User> users) {
+
+
+	public ERS_User_Role(String role) {
 		super();
 		this.role = role;
-		this.users = users;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "ERS_User_Role [id=" + id + ", role=" + role + ", users=" + users + "]";
+		return "ERS_User_Role [id=" + id + ", role=" + role + "]";
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -57,9 +60,10 @@ public class ERS_User_Role {
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -77,36 +81,31 @@ public class ERS_User_Role {
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
-		if (users == null) {
-			if (other.users != null)
-				return false;
-		} else if (!users.equals(other.users))
-			return false;
 		return true;
 	}
+
+
 
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 	public String getRole() {
 		return role;
 	}
 
+
+
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public Set<ERS_User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<ERS_User> users) {
-		this.users = users;
 	}
 
 	

@@ -82,6 +82,8 @@ public String toString() {
 			+ ", last_name=" + last_name + ", email=" + email + ", role=" + role + "]";
 }
 
+
+
 @Override
 public int hashCode() {
 	final int prime = 31;

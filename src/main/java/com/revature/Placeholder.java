@@ -28,41 +28,41 @@ public class Placeholder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		ERS_User_Role b1 = new ERS_User_Role("Employee",null);
-		ERS_User_Role b2 = new ERS_User_Role("Manager",null);
-		ERS_Reimbursement_Status c1 = new ERS_Reimbursement_Status("Pending", null);
-		ERS_Reimbursement_Status c2 = new ERS_Reimbursement_Status("Approved", null);
-		ERS_Reimbursement_Status c3 = new ERS_Reimbursement_Status("Denied", null);
-		ERS_Reimbursement_Type d1 = new ERS_Reimbursement_Type("Lodging", null);
-		ERS_Reimbursement_Type d2 = new ERS_Reimbursement_Type("Travel", null);
-		ERS_Reimbursement_Type d3 = new ERS_Reimbursement_Type("Food", null);
-		ERS_Reimbursement_Type d4 = new ERS_Reimbursement_Type("Other", null);
-		ERS_User a1 = new ERS_User("demoman","password","Johnathan", "Stroud","g@gmail",null);
-		ERS_User a2 = new ERS_User("adminman","password","Bob", "Base","b@gmail",null);
-		ERS_Reimbursement f1 = new ERS_Reimbursement(500, LocalDateTime.now(), null,"jetskis", null,a1,a2,c1,d4);
-
-		
-		rDAO.insertUserRole(b1);
-		rDAO.insertUserRole(b2);
-		uDAO.insertUser(a1);
-		a1.setRole(b1);
-		uDAO.updateUser(a1);
-		
-		System.out.println(a1.getRole().getId());
-		
-		sDAO.insertStatus(c1);
-		sDAO.insertStatus(c2);
-		sDAO.insertStatus(c3);
-		
-		tDAO.insertType(d1);
-		tDAO.insertType(d2);
-		tDAO.insertType(d3);
-		tDAO.insertType(d4);
-		
-		reDAO.insertReimbursement(f1);
-		
-		System.out.println("Done!");
+//		
+//		ERS_User_Role b1 = new ERS_User_Role("Employee");
+//		ERS_User_Role b2 = new ERS_User_Role("Manager");
+//		ERS_Reimbursement_Status c1 = new ERS_Reimbursement_Status("Pending", null);
+//		ERS_Reimbursement_Status c2 = new ERS_Reimbursement_Status("Approved", null);
+//		ERS_Reimbursement_Status c3 = new ERS_Reimbursement_Status("Denied", null);
+//		ERS_Reimbursement_Type d1 = new ERS_Reimbursement_Type("Lodging", null);
+//		ERS_Reimbursement_Type d2 = new ERS_Reimbursement_Type("Travel", null);
+//		ERS_Reimbursement_Type d3 = new ERS_Reimbursement_Type("Food", null);
+//		ERS_Reimbursement_Type d4 = new ERS_Reimbursement_Type("Other", null);
+//		ERS_User a1 = new ERS_User("demoman","password","Johnathan", "Stroud","g@gmail",null);
+//		ERS_User a2 = new ERS_User("adminman","password","Bob", "Base","b@gmail",null);
+//		ERS_Reimbursement f1 = new ERS_Reimbursement(500, LocalDateTime.now(), null,"jetskis", null,a1,a2,c1,d4);
+//
+//		
+//		rDAO.insertUserRole(b1);
+//		rDAO.insertUserRole(b2);
+//		uDAO.insertUser(a1);
+//		a1.setRole(b1);
+//		uDAO.updateUser(a1);
+//		
+//		System.out.println(a1.getRole().getId());
+//		
+//		sDAO.insertStatus(c1);
+//		sDAO.insertStatus(c2);
+//		sDAO.insertStatus(c3);
+//		
+//		tDAO.insertType(d1);
+//		tDAO.insertType(d2);
+//		tDAO.insertType(d3);
+//		tDAO.insertType(d4);
+//		
+//		reDAO.insertReimbursement(f1);
+//		
+//		System.out.println("Done!");
 
 		
 //		List<Book> books = bDAO.findAllBooks();
